@@ -4,6 +4,13 @@
   background: #ffffff;
   min-height: 100vh;
 
+  &.night {
+
+    .header {
+      background: linear-gradient(118.25deg, #4C4E53 1.2%, #0C1224 95.02%);
+    }
+  }
+
   .header {
     background: linear-gradient(118.25deg, #4F80FA 1.2%, #3764D7 59.26%, #335FD1 79.2%);
     padding: 24px 16px;

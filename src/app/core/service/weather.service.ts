@@ -15,7 +15,7 @@ export class WeatherService {
     return firstValueFrom(this.http.get(`${environment.apiCurrent}&q=47.696177,35.350919&aqi=yes&lang=ru`));
   }
 
-  getForecastWeather() {
-    return firstValueFrom(this.http.get<Forecast>(`${environment.apiForecast}&q=47.696177,35.350919&days=10&aqi=yes&lang=ru&alerts=yes`));
+  getForecastWeather(coord: any) {
+    return firstValueFrom(this.http.get<Forecast>(`${environment.apiForecast}&q=${coord.value}&days=10&aqi=yes&lang=ru&alerts=yes`));
   }
 }

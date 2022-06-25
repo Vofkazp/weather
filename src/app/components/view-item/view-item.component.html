@@ -1,4 +1,4 @@
-<div class="content" *ngIf="weather">
+<div class="content" *ngIf="weather" [class.night]="isNight">
   <header class="header">
     <div class="top-row">
       <button class="btn back" routerLink="/">
@@ -7,7 +7,7 @@
                 fill="white"/>
         </svg>
       </button>
-      <h3 class="title">{{weather.location.country}}, {{weather.location.name}}</h3>
+      <h3 class="title">{{select.name}}</h3>
       <button class="btn more">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path

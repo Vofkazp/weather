@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {WeatherService} from "../../core/service/weather.service";
 import {Forecast, hour} from "../../core/interface/forecast";
+import {Select} from "../../core/interface/select";
+import {PositionService} from "../../core/service/position.service";
 
 @Component({
   selector: 'app-view-item',
@@ -14,27 +16,49 @@ export class ViewItemComponent implements OnInit {
   date: Date = new Date();
   load = false;
   hourList: hour[];
+  isNight = false;
+  select: Select;
 
   constructor(
     public activateRoute: ActivatedRoute,
     public weatherService: WeatherService,
-    public router: Router
+    public router: Router,
+    public position: PositionService
   ) { }
 
   ngOnInit(): void {
+    this.select = this.position.getSelect();
     this.id = this.activateRoute.snapshot.params['id'];
     this.loadData();
   }
 
   loadData() {
     this.load = true;
-    this.weatherService.getForecastWeather().then(res => {
+    this.weatherService.getForecastWeather(this.select).then(res => {
       console.log(res);
       this.load = false;
       this.weather = res;
+      this.getIsNight();
       this.hourList = [];
       this.lastHours();
     });
+  }
+
+  getIsNight() {
+    let hourOut = this.weather.forecast.forecastday[this.id].astro.sunrise.split(':')[0];
+    const minOut = this.weather.forecast.forecastday[this.id].astro.sunrise.split(':')[1].split(' ')[0];
+    const stateOut = this.weather.forecast.forecastday[this.id].astro.sunrise.split(':')[1].split(' ')[1];
+    let hourIn = this.weather.forecast.forecastday[this.id].astro.sunset.split(':')[0];
+    const minIn = this.weather.forecast.forecastday[this.id].astro.sunset.split(':')[1].split(' ')[0];
+    const stateIn = this.weather.forecast.forecastday[this.id].astro.sunset.split(':')[1].split(' ')[1];
+    hourOut = stateOut === 'AM' ? hourOut : hourOut + 12;
+    hourIn = stateIn === 'AM' ? hourIn : String(+hourIn + 12);
+    const rise = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), +hourOut, +minOut, 0);
+    const sunrise = rise.getTime();
+    const set = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), +hourIn, +minIn, 0);
+    const sunset = set.getTime();
+    const toTime = this.date.getTime();
+    this.isNight = toTime<sunrise || toTime > sunset;
   }
 
   getPressure() {
