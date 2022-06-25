@@ -1,0 +1,205 @@
+.content {
+  max-width: 375px;
+  margin: auto;
+  background: #ffffff;
+  min-height: 100vh;
+
+  .header {
+    background: linear-gradient(118.25deg, #4F80FA 1.2%, #3764D7 59.26%, #335FD1 79.2%);
+    padding: 24px 16px;
+
+    .top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .btn {
+        border: none;
+        outline: none;
+        background: transparent;
+        display: block;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+      }
+
+      .title {
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 17px;
+        color: #FFFFFF;
+        margin: 0;
+      }
+    }
+
+    .day-name {
+      margin: 24px 0 0;
+      text-align: center;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #FFFFFF;
+    }
+
+    .icon {
+      display: block;
+      margin: 24px auto 0;
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+    }
+
+    .temperature {
+      margin: 16px 0 0;
+      text-align: center;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      color: #FFFFFF;
+    }
+
+    .weather-text {
+      margin: 4px 0 0;
+      text-align: center;
+      font-weight: 600;
+      font-size: 20px;
+      line-height: 24px;
+      color: #FFFFFF;
+    }
+
+    .last-update {
+      display: flex;
+      justify-content: center;
+      margin: 32px 0 0;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      color: #FFFFFF;
+      cursor: pointer;
+
+      svg {
+        margin-left: 4px;
+      }
+    }
+  }
+
+  .hours-weather {
+    padding: 0 16px;
+    margin-top: 24px;
+
+    .title {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      color: #000000;
+    }
+
+    .hours-block {
+      margin-top: 16px;
+      display: flex;
+      overflow-x: auto;
+      padding-bottom: 10px;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+        background-color: #FBFBFB;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: #8c8b8b;
+        border-radius: 5px;
+      }
+
+      .hours-item {
+        width: 78px;
+        min-width: 78px;
+        height: 107px;
+        background: #FBFBFB;
+        border-radius: 4px;
+        padding: 12px;
+
+        &:not(:last-child) {
+          margin-right: 10px;
+        }
+
+        .hours-icon {
+          display: block;
+          margin: auto;
+          width: 40px;
+          height: 40px;
+          object-fit: contain;
+        }
+
+        .hours-temp {
+          margin: 4px 0 0;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 17px;
+          color: #201C1C;
+          text-align: center;
+        }
+
+        .hours-time {
+          margin: 8px 0 0;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 14px;
+          color: #494343;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .detail {
+    padding: 0 16px 16px;
+    margin-top: 24px;
+
+    .title {
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      color: #000000;
+      margin: 0;
+    }
+
+    .detail-block {
+      margin-top: 16px;
+      display: grid;
+      grid-auto-rows: 69px;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 16px;
+
+      .detail-item {
+        background: #FAFAFA;
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+
+        .description {
+          margin-left: 12px;
+
+          .description-value {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 17px;
+            color: #201C1C;
+            margin: 0;
+          }
+
+          .description-title {
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 16px;
+            color: #494343;
+            margin: 4px 0 0;
+          }
+        }
+      }
+    }
+  }
+}

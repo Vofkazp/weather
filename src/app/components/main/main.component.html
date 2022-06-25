@@ -1,0 +1,54 @@
+<div class="container" *ngIf="weather">
+  <header class="header">
+    {{weather.location.country}}, {{weather.location.name}}
+  </header>
+  <div class="main-card">
+    <div class="top-row">
+      <div class="date">{{date | date: 'EEEE, dd MMMM YYYY'}}</div>
+      <div class="time">{{date | date: 'HH:mm'}}</div>
+    </div>
+    <div class="weather-block">
+      <img class="icon" src="{{weather.current.condition.icon}}" alt="{{weather.current.condition.text}}">
+      <div class="weather-info">
+        <div class="temperature">{{weather.current.temp_c}}° C</div>
+        <div class="text">{{weather.current.condition.text}}</div>
+      </div>
+    </div>
+    <div class="last-update" (click)="loadData()">
+      Последнее обновление {{weather.current.last_updated | date: 'HH:mm'}}
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M7.99666 2.66666C5.22415 2.66287 2.91111 4.78398 2.67534 7.54646C2.43957 10.3089 4.35971 12.7913 7.09277 13.2574C9.82583 13.7235 12.4602 12.0178 13.1533 9.33333H11.766C11.0879 11.2514 9.07802 12.3549 7.09564 11.8976C5.11327 11.4403 3.78993 9.56791 4.02054 7.54659C4.25115 5.52527 5.96223 3.99903 7.99666 3.99999C9.05636 4.00155 10.0709 4.42919 10.812 5.18667L8.66666 7.33333H13.3333V2.66666L11.766 4.23333C10.7685 3.22975 9.41166 2.66581 7.99666 2.66666Z"
+          fill="white"/>
+      </svg>
+    </div>
+  </div>
+  <div class="hours-weather">
+    <h3 class="title">Почасовая погода</h3>
+    <div class="hours-block">
+      <div class="hours-item" *ngFor="let item of hourList">
+        <img class="hours-icon" src="{{item.condition.icon}}" alt="{{weather.current.condition.text}}">
+        <p class="hours-temp">{{item.temp_c}}°</p>
+        <p class="hours-time">{{item.time | date: 'HH:mm'}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="days-weather">
+    <h3 class="title">Посуточная погода</h3>
+    <div class="days-block" *ngIf="weather.forecast.forecastday.length > 0">
+      <div class="days-item" *ngFor="let day of weather.forecast.forecastday; let i = index" (click)="getView(i)">
+        <div class="img-block">
+          <img src="{{day.day.condition.icon}}" alt="">
+        </div>
+        <div class="day-text">
+          <p class="name">{{day.date | date: 'EE, dd MMMM YYYY'}}</p>
+          <p class="type">{{day.day.condition.text}}</p>
+        </div>
+        <p class="temp">{{day.day.avgtemp_c}}° C</p>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M14.5 12L9.5 7V17L14.5 12Z" fill="#201C1C"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
