@@ -10,26 +10,7 @@ export class PositionService {
   select: Select;
 
   constructor(
-    public weatherService: WeatherService
   ) {
-    this.weatherService.getIp().then(res => {
-      this.selectList.push(
-        {
-          name: 'Текущее местоположение',
-          value: String(res.latitude + ',' + res.longitude)
-        }
-      );
-    });
-    const local: Select = JSON.parse(String(localStorage.getItem('location'))) as Select;
-    this.setSelect(local ? local : this.selectList[0]);
-    const list: Select[] = JSON.parse(String(localStorage.getItem('locationList')));
-    if (list) {
-      for (let item of list) {
-        if (item.name !== 'Текущее местоположение') {
-          this.selectList.push(item);
-        }
-      }
-    }
   }
 
   getSelectList() {
@@ -38,6 +19,11 @@ export class PositionService {
 
   setSelectList(select: Select) {
     this.selectList.push(select);
+    localStorage.setItem('locationList', JSON.stringify(this.selectList));
+  }
+
+  addSelectList(select: Select[]) {
+    this.selectList = select;
     localStorage.setItem('locationList', JSON.stringify(this.selectList));
   }
 

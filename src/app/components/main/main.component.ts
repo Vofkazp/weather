@@ -19,21 +19,42 @@ export class MainComponent implements OnInit {
   select: Select;
   selectItems: Select[] = [];
 
-
   constructor(
     public weatherService: WeatherService,
     public router: Router,
     public position: PositionService
   ) {
-    this.selectItems = this.position.getSelectList();
     setInterval(() =>{
       this.date = new Date();
     }, 10000);
   }
 
   ngOnInit(): void {
-    this.select = this.position.getSelect();
-    this.loadData();
+    this.loadSelect();
+  }
+
+  loadSelect() {
+    this.weatherService.getIp().then(res => {
+      this.selectItems.push(
+        {
+          name: 'Текущее местоположение',
+          value: String(res.latitude + ',' + res.longitude)
+        }
+      );
+      const local: Select = JSON.parse(String(localStorage.getItem('location'))) as Select;
+      const list: Select[] = JSON.parse(String(localStorage.getItem('locationList')));
+      this.position.setSelect(local ? local : this.selectItems[0]);
+      if (list) {
+        for (let item of list) {
+          if (item.name !== 'Текущее местоположение') {
+            this.selectItems.push(item);
+          }
+        }
+      }
+      this.position.addSelectList(this.selectItems);
+      this.select = this.position.getSelect();
+      this.loadData();
+    });
   }
 
   loadData() {
@@ -41,7 +62,6 @@ export class MainComponent implements OnInit {
     this.weatherService.getForecastWeather(this.select).then(res => {
       this.load = false;
       this.weather = res;
-      console.log(res);
       this.getIsNight();
       this.hourList = [];
       this.lastHours();
