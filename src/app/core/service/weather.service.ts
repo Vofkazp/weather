@@ -13,7 +13,7 @@ export class WeatherService {
   constructor(private http: HttpClient) {}
 
   getIp() {
-    return firstValueFrom(this.http.get<any>(`http://ipwho.is/`));
+    return firstValueFrom(this.http.get<any>(`https://ipwho.is/`));
   }
 
   searchCity(search: string) {

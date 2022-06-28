@@ -18,6 +18,13 @@ export class PositionService {
           name: 'Текущее местоположение',
           value: res.latitude + ',' + res.longitude
         }
+      );
+    }).catch(()=>{
+      this.selectList.push(
+        {
+          name: 'Запорожская обл., Григорьевка',
+          value: '47.69619680698855,35.350946527250876'
+        }
       )
     });
     const local: Select = JSON.parse(String(localStorage.getItem('location'))) as Select;
