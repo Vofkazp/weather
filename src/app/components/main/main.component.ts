@@ -4,7 +4,6 @@ import {Forecast, hour} from "../../core/interface/forecast";
 import {Router} from "@angular/router";
 import {PositionService} from "../../core/service/position.service";
 import {Select} from "../../core/interface/select";
-import {SELECT} from "../../core/collection/selectItem";
 
 @Component({
   selector: 'app-main',
@@ -18,7 +17,7 @@ export class MainComponent implements OnInit {
   hourList: hour[];
   isNight = false;
   select: Select;
-  selectItems: Select[] = SELECT;
+  selectItems: Select[] = [];
 
 
   constructor(
@@ -26,6 +25,7 @@ export class MainComponent implements OnInit {
     public router: Router,
     public position: PositionService
   ) {
+    this.selectItems = this.position.getSelectList();
     setInterval(() =>{
       this.date = new Date();
     }, 10000);
@@ -41,14 +41,11 @@ export class MainComponent implements OnInit {
     this.weatherService.getForecastWeather(this.select).then(res => {
       this.load = false;
       this.weather = res;
-      // console.log(res);
+      console.log(res);
       this.getIsNight();
       this.hourList = [];
       this.lastHours();
     });
-    this.weatherService.getIp().then(res=>{
-      console.log(res.latitude + ',' + res.longitude);
-    })
   }
 
   getIsNight() {

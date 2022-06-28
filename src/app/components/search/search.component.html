@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="top-row">
+    <button class="btn back" routerLink="/">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8.28799 12L14.298 18.01L15.712 16.596L11.112 11.996L15.712 7.39599L14.298 5.98999L8.28799 12Z"
+              fill="#000000"/>
+      </svg>
+    </button>
+    <h3 class="title">Поиск</h3>
+    <button class="btn more">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M18 14C16.8954 14 16 13.1046 16 12C16 10.8954 16.8954 10 18 10C19.1046 10 20 10.8954 20 12C20 12.5304 19.7893 13.0391 19.4142 13.4142C19.0391 13.7893 18.5304 14 18 14ZM12 14C10.8954 14 10 13.1046 10 12C10 10.8954 10.8954 10 12 10C13.1046 10 14 10.8954 14 12C14 12.5304 13.7893 13.0391 13.4142 13.4142C13.0391 13.7893 12.5304 14 12 14ZM6 14C4.89543 14 4 13.1046 4 12C4 10.8954 4.89543 10 6 10C7.10457 10 8 10.8954 8 12C8 12.5304 7.78929 13.0391 7.41421 13.4142C7.03914 13.7893 6.53043 14 6 14Z"
+          fill="#000000"/>
+      </svg>
+    </button>
+  </div>
+  <form [formGroup]="search">
+    <mat-form-field class="f-design" appearance="outline">
+      <mat-label>Поиск</mat-label>
+      <input matInput formControlName="search">
+    </mat-form-field>
+  </form>
+  <div style="margin-bottom: 10px" class="search-list" *ngIf="searchList.length !== 0">
+    <p class="title">Результат:</p>
+    <div class="search-item" *ngFor="let item of searchList">
+      <p>{{item.region}}, {{item.name}}</p>
+      <button class="btn" (click)="add(item)">
+        <span style="font-size: 20px">+</span>
+      </button>
+    </div>
+  </div>
+  <div class="search-list" *ngIf="saveList.length !== 0">
+    <p class="title">Сохраненные:</p>
+    <div class="search-item" *ngFor="let item of saveList">
+      <p>{{item.name}}</p>
+      <button class="btn" *ngIf="item.name !== 'Текущее местоположение'" (click)="remove(item)">
+        <span style="font-size: 20px">-</span>
+      </button>
+    </div>
+  </div>
+</div>

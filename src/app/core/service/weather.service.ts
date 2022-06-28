@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {Forecast} from "../interface/forecast";
+import {Search} from "../interface/select";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,10 @@ export class WeatherService {
 
   getIp() {
     return firstValueFrom(this.http.get<any>(`http://ipwho.is/`));
+  }
+
+  searchCity(search: string) {
+    return firstValueFrom(this.http.get<Search[]>(`${environment.apiSearch}&q=${search}`));
   }
 
   getForecastWeather(coord: any) {
