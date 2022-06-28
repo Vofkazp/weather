@@ -13,19 +13,13 @@ export class PositionService {
     public weatherService: WeatherService
   ) {
     this.weatherService.getIp().then(res => {
+      // console.log(res);
       this.selectList.push(
         {
           name: 'Текущее местоположение',
           value: res.latitude + ',' + res.longitude
         }
       );
-    }).catch(()=>{
-      this.selectList.push(
-        {
-          name: 'Запорожская обл., Григорьевка',
-          value: '47.69619680698855,35.350946527250876'
-        }
-      )
     });
     const local: Select = JSON.parse(String(localStorage.getItem('location'))) as Select;
     this.setSelect(local ? local : this.selectList[0]);

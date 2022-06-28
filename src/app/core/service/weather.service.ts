@@ -13,7 +13,7 @@ export class WeatherService {
   constructor(private http: HttpClient) {}
 
   getIp() {
-    return firstValueFrom(this.http.get<any>(`https://ipwho.is/`));
+    return firstValueFrom(this.http.get<any>(`https://ipgeolocation.abstractapi.com/v1/?api_key=d7bfb6d828284193ab0c4d6c54a8d010`));
   }
 
   searchCity(search: string) {
