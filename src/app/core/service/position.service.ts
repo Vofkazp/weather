@@ -13,11 +13,10 @@ export class PositionService {
     public weatherService: WeatherService
   ) {
     this.weatherService.getIp().then(res => {
-      // console.log(res);
       this.selectList.push(
         {
           name: 'Текущее местоположение',
-          value: res.latitude + ',' + res.longitude
+          value: String(res.latitude + ',' + res.longitude)
         }
       );
     });
