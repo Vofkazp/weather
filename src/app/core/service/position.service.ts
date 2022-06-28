@@ -10,7 +10,8 @@ export class PositionService {
 
   select: Select;
   constructor() {
-    this.setSelect(this.selectItems[0]);
+    const local: Select = JSON.parse(String(localStorage.getItem('location'))) as Select;
+    this.setSelect(local ? local : this.selectItems[0]);
   }
 
   getSelect() {
@@ -18,6 +19,7 @@ export class PositionService {
   }
 
   setSelect(select: Select) {
+    localStorage.setItem('location', JSON.stringify(select));
     this.select = select;
   }
 }

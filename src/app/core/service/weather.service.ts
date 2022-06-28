@@ -11,8 +11,8 @@ export class WeatherService {
 
   constructor(private http: HttpClient) {}
 
-  getCurrentWeather() {
-    return firstValueFrom(this.http.get(`${environment.apiCurrent}&q=47.696177,35.350919&aqi=yes&lang=ru`));
+  getIp() {
+    return firstValueFrom(this.http.get<any>(`http://ipwho.is/`));
   }
 
   getForecastWeather(coord: any) {

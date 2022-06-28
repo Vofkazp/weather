@@ -41,11 +41,14 @@ export class MainComponent implements OnInit {
     this.weatherService.getForecastWeather(this.select).then(res => {
       this.load = false;
       this.weather = res;
-      console.log(res);
+      // console.log(res);
       this.getIsNight();
       this.hourList = [];
       this.lastHours();
     });
+    this.weatherService.getIp().then(res=>{
+      console.log(res.latitude + ',' + res.longitude);
+    })
   }
 
   getIsNight() {
