@@ -1,4 +1,5 @@
-<div class="container" *ngIf="weather" [class.night]="isNight">
+<app-loader *ngIf="load"></app-loader>
+<div class="container" *ngIf="weather && !load" [class.night]="isNight">
   <header class="header">
     <div class="select" ngbDropdown autoClose="false">
       <div class="select-title" ngbDropdownToggle>

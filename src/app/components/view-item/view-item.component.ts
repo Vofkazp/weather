@@ -36,7 +36,9 @@ export class ViewItemComponent implements OnInit {
     this.load = true;
     this.weatherService.getForecastWeather(this.select).then(res => {
       // console.log(res);
-      this.load = false;
+      setTimeout(() => {
+        this.load = false;
+      }, 800);
       this.weather = res;
       this.getIsNight();
       this.hourList = [];

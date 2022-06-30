@@ -24,7 +24,7 @@ export class MainComponent implements OnInit {
     public router: Router,
     public position: PositionService
   ) {
-    setInterval(() =>{
+    setInterval(() => {
       this.date = new Date();
     }, 10000);
   }
@@ -60,7 +60,9 @@ export class MainComponent implements OnInit {
   loadData() {
     this.load = true;
     this.weatherService.getForecastWeather(this.select).then(res => {
-      this.load = false;
+      setTimeout(() => {
+        this.load = false;
+      }, 800);
       this.weather = res;
       this.getIsNight();
       this.hourList = [];
@@ -82,7 +84,7 @@ export class MainComponent implements OnInit {
     const set = new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDate(), +hourIn, +minIn, 0);
     const sunset = set.getTime();
     const toTime = this.date.getTime();
-    this.isNight = toTime<sunrise || toTime > sunset;
+    this.isNight = toTime < sunrise || toTime > sunset;
   }
 
   lastHours() {
@@ -90,7 +92,7 @@ export class MainComponent implements OnInit {
     let day = hour === 0 ? 1 : 0;
     for (let i = 0; i < 4; i++) {
       this.hourList.push(this.weather.forecast.forecastday[day].hour[hour]);
-      if(hour === 23) {
+      if (hour === 23) {
         hour = 0;
         day++;
       } else {

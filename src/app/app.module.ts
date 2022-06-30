@@ -14,6 +14,7 @@ import { SearchComponent } from './components/search/search.component';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {ReactiveFormsModule} from "@angular/forms";
+import { LoaderComponent } from './components/loader/loader.component';
 
 registerLocaleData(localeRu);
 
@@ -22,7 +23,8 @@ registerLocaleData(localeRu);
     AppComponent,
     MainComponent,
     ViewItemComponent,
-    SearchComponent
+    SearchComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
